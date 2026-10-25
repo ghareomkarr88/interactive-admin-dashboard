@@ -1,0 +1,503 @@
+<!--
+    Project: Interactive Dashboard (Admin Panel)
+    Author: Omkar R. Ghare
+    Designation: Front-End Web Developer
+    Email: ghareomkarr88@gmail.com
+
+    © 2026 Omkar R. Ghare. All rights reserved.
+-->
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Premium Interactive Admin Dashboard with Data Visualization, Analytics, and Real-time Monitoring">
+    <meta name="keywords" content="admin dashboard, analytics, data visualization, admin panel">
+    <meta name="author" content="Omkar R. Ghare">
+    <title>Dashboard Pro | Premium Admin Panel</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- PRELOADER -->
+    <div class="preloader" id="preloader">
+        <div class="preloader-logo">⚡ NexaShop</div>
+        <div class="preloader-spinner">
+            <div class="ring"></div>
+            <div class="ring"></div>
+            <div class="ring"></div>
+            <div class="dot"></div>
+        </div>
+        <div class="preloader-progress">
+            <div class="preloader-progress-bar"></div>
+        </div>
+        <div class="preloader-text">Loading Dashboard...</div>
+    </div>
+
+    <!-- NOTIFICATION OVERLAY -->
+    <div class="notification-overlay" id="notificationOverlay"></div>
+
+    <!-- NOTIFICATION PANEL -->
+    <div class="notification-panel" id="notificationPanel">
+        <div class="notification-panel-header">
+            <h3 class="notification-panel-title">🔔 Notifications</h3>
+            <button class="notification-close-btn" id="notificationCloseBtn">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+            </button>
+        </div>
+        <div class="notification-list" id="notificationList"></div>
+    </div>
+
+    <!-- SIDEBAR OVERLAY (Mobile) -->
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+    <!-- DASHBOARD LAYOUT -->
+    <div class="dashboard-layout" id="dashboardLayout">
+        <!-- SIDEBAR -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <a href="#" class="sidebar-logo">
+                    <div class="sidebar-logo-icon">⚡</div>
+                    <span class="sidebar-logo-text">NexaShop</span>
+                </a>
+            </div>
+
+            <nav class="sidebar-nav">
+                <div class="nav-section-title">Main</div>
+                <a href="#" class="nav-item active" data-section="dashboard">
+                    <span class="nav-item-icon">📊</span>
+                    <span class="nav-item-text">Dashboard</span>
+                </a>
+                <a href="#" class="nav-item" data-section="analytics">
+                    <span class="nav-item-icon">📈</span>
+                    <span class="nav-item-text">Analytics</span>
+                    <span class="nav-item-badge">New</span>
+                </a>
+                <a href="#" class="nav-item" data-section="ecommerce">
+                    <span class="nav-item-icon">🛒</span>
+                    <span class="nav-item-text">E-Commerce</span>
+                </a>
+                <a href="#" class="nav-item" data-section="crypto">
+                    <span class="nav-item-icon">💰</span>
+                    <span class="nav-item-text">Crypto</span>
+                </a>
+
+                <div class="nav-section-title">Apps</div>
+                <a href="#" class="nav-item" data-section="calendar">
+                    <span class="nav-item-icon">📅</span>
+                    <span class="nav-item-text">Calendar</span>
+                </a>
+                <a href="#" class="nav-item" data-section="messages">
+                    <span class="nav-item-icon">💬</span>
+                    <span class="nav-item-text">Messages</span>
+                    <span class="nav-item-badge">5</span>
+                </a>
+                <a href="#" class="nav-item" data-section="email">
+                    <span class="nav-item-icon">📧</span>
+                    <span class="nav-item-text">Email</span>
+                </a>
+                <a href="#" class="nav-item" data-section="tasks">
+                    <span class="nav-item-icon">✅</span>
+                    <span class="nav-item-text">Tasks</span>
+                </a>
+
+                <div class="nav-section-title">Management</div>
+                <a href="#" class="nav-item" data-section="users">
+                    <span class="nav-item-icon">👥</span>
+                    <span class="nav-item-text">Users</span>
+                </a>
+                <a href="#" class="nav-item" data-section="products">
+                    <span class="nav-item-icon">📦</span>
+                    <span class="nav-item-text">Products</span>
+                </a>
+                <a href="#" class="nav-item" data-section="orders">
+                    <span class="nav-item-icon">🧾</span>
+                    <span class="nav-item-text">Orders</span>
+                    <span class="nav-item-badge">12</span>
+                </a>
+                <a href="#" class="nav-item" data-section="invoices">
+                    <span class="nav-item-icon">💳</span>
+                    <span class="nav-item-text">Invoices</span>
+                </a>
+
+                <div class="nav-section-title">Settings</div>
+                <a href="#" class="nav-item" data-section="settings">
+                    <span class="nav-item-icon">⚙️</span>
+                    <span class="nav-item-text">Settings</span>
+                </a>
+                <a href="#" class="nav-item" data-section="security">
+                    <span class="nav-item-icon">🔒</span>
+                    <span class="nav-item-text">Security</span>
+                </a>
+            </nav>
+
+            <div class="sidebar-footer">
+                <div class="sidebar-user">
+                    <div class="sidebar-user-avatar">OG</div>
+                    <div class="sidebar-user-info">
+                        <div class="sidebar-user-name">Omkar Ghare</div>
+                        <div class="sidebar-user-role">Administrator</div>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- HEADER -->
+        <header class="header">
+            <div class="header-left">
+                <button class="hamburger" id="hamburgerBtn" aria-label="Toggle sidebar">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="15" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+                </button>
+                <button class="collapse-btn" id="collapseBtn" aria-label="Collapse sidebar">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>
+                </button>
+                <div class="header-search">
+                    <span class="header-search-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                    </span>
+                    <input type="text" placeholder="Search anything..." id="globalSearch" autocomplete="off">
+                </div>
+            </div>
+            <div class="header-right">
+                <button class="header-btn" id="notificationBtn" aria-label="Notifications">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+                    <span class="notification-badge" id="notifBadge">7</span>
+                </button>
+                <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+                    <svg class="moon-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+                    <svg class="sun-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+                </button>
+                <div class="profile-dropdown" id="profileDropdown">
+                    <button class="profile-btn" id="profileBtn">
+                        <div class="profile-avatar">OG</div>
+                        <div class="profile-info">
+                            <div class="profile-name">Omkar Ghare</div>
+                            <div class="profile-role">Admin</div>
+                        </div>
+                        <span class="profile-chevron">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+                        </span>
+                    </button>
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item" href="#">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                            My Profile
+                        </a>
+                        <a class="dropdown-item" href="#">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+                            Settings
+                        </a>
+                        <a class="dropdown-item" href="#">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>
+                            Billing
+                        </a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item danger" href="#">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+                            Log Out
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- MAIN CONTENT -->
+        <main class="main-content" id="mainContent">
+            <!-- Page Header -->
+            <div class="page-header animate-in">
+                <h1 class="page-title">Store overview</h1>
+                <p class="page-subtitle">Welcome back, Omkar. Here's how NexaShop is doing this month.</p>
+            </div>
+
+            <!-- SECTION 1: KPI Cards -->
+            <div class="kpi-grid">
+                <div class="kpi-card animate-in delay-1" id="kpi1">
+                    <div class="kpi-card-top">
+                        <div class="kpi-icon">💰</div>
+                        <div class="kpi-trend up">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/></svg>
+                            +8.4%
+                        </div>
+                    </div>
+                    <div class="kpi-value" data-counter="26475" data-prefix="$" data-suffix="">$0</div>
+                    <div class="kpi-label">Revenue YTD</div>
+                    <div class="kpi-sparkline"><canvas id="sparkline1"></canvas></div>
+                </div>
+                <div class="kpi-card animate-in delay-2" id="kpi2">
+                    <div class="kpi-card-top">
+                        <div class="kpi-icon">👥</div>
+                        <div class="kpi-trend up">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/></svg>
+                            +6.2%
+                        </div>
+                    </div>
+                    <div class="kpi-value" data-counter="1284" data-prefix="" data-suffix="">0</div>
+                    <div class="kpi-label">Customers</div>
+                    <div class="kpi-sparkline"><canvas id="sparkline2"></canvas></div>
+                </div>
+                <div class="kpi-card animate-in delay-3" id="kpi3">
+                    <div class="kpi-card-top">
+                        <div class="kpi-icon">📦</div>
+                        <div class="kpi-trend up">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/></svg>
+                            +4.1%
+                        </div>
+                    </div>
+                    <div class="kpi-value" data-counter="462" data-prefix="" data-suffix="">0</div>
+                    <div class="kpi-label">Orders this month</div>
+                    <div class="kpi-sparkline"><canvas id="sparkline3"></canvas></div>
+                </div>
+                <div class="kpi-card animate-in delay-4" id="kpi4">
+                    <div class="kpi-card-top">
+                        <div class="kpi-icon">📊</div>
+                        <div class="kpi-trend up">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/></svg>
+                            +0.3%
+                        </div>
+                    </div>
+                    <div class="kpi-value" data-counter="4" data-prefix="" data-suffix="%">0%</div>
+                    <div class="kpi-label">Conversion Rate</div>
+                    <div class="kpi-sparkline"><canvas id="sparkline4"></canvas></div>
+                </div>
+            </div>
+
+            <!-- SECTION 2: Charts -->
+            <div class="charts-grid">
+                <div class="chart-card animate-in delay-3">
+                    <div class="card-header">
+                        <div>
+                            <h3 class="card-title">Revenue Overview</h3>
+                            <p class="card-subtitle">Revenue and costs · 2026</p>
+                        </div>
+                        <div class="card-actions">
+                            <button class="card-filter-btn active" data-filter="monthly">Monthly</button>
+                            <button class="card-filter-btn" data-filter="weekly">Weekly</button>
+                            <button class="card-filter-btn" data-filter="daily">Daily</button>
+                        </div>
+                    </div>
+                    <div class="chart-container">
+                        <canvas id="revenueChart"></canvas>
+                    </div>
+                </div>
+                <div class="chart-card animate-in delay-4">
+                    <div class="card-header">
+                        <div>
+                            <h3 class="card-title">Traffic Sources</h3>
+                            <p class="card-subtitle">Where visitors come from</p>
+                        </div>
+                    </div>
+                    <div class="chart-container">
+                        <canvas id="trafficChart"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SECTION 3: Progress Stats -->
+            <div class="stats-grid">
+                <div class="stats-card animate-in delay-4">
+                    <div class="card-header">
+                        <h3 class="card-title">Sales Targets</h3>
+                    </div>
+                    <div class="progress-stat">
+                        <div class="progress-stat-header">
+                            <span class="progress-stat-label">Monthly revenue target</span>
+                            <span class="progress-stat-value">78%</span>
+                        </div>
+                        <div class="progress-bar-container">
+                            <div class="progress-bar-fill progress-purple" style="width: 0%" data-width="78%"></div>
+                        </div>
+                    </div>
+                    <div class="progress-stat">
+                        <div class="progress-stat-header">
+                            <span class="progress-stat-label">Order target</span>
+                            <span class="progress-stat-value">92%</span>
+                        </div>
+                        <div class="progress-bar-container">
+                            <div class="progress-bar-fill progress-green" style="width: 0%" data-width="92%"></div>
+                        </div>
+                    </div>
+                    <div class="progress-stat">
+                        <div class="progress-stat-header">
+                            <span class="progress-stat-label">New customer target</span>
+                            <span class="progress-stat-value">64%</span>
+                        </div>
+                        <div class="progress-bar-container">
+                            <div class="progress-bar-fill progress-blue" style="width: 0%" data-width="64%"></div>
+                        </div>
+                    </div>
+                    <div class="progress-stat">
+                        <div class="progress-stat-header">
+                            <span class="progress-stat-label">Returning customers</span>
+                            <span class="progress-stat-value">85%</span>
+                        </div>
+                        <div class="progress-bar-container">
+                            <div class="progress-bar-fill progress-orange" style="width: 0%" data-width="85%"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="stats-card animate-in delay-5">
+                    <div class="card-header">
+                        <h3 class="card-title">Performance Metrics</h3>
+                    </div>
+                    <div class="chart-container" style="height: 220px;">
+                        <canvas id="performanceChart"></canvas>
+                    </div>
+                </div>
+
+                <div class="stats-card animate-in delay-6">
+                    <div class="card-header">
+                        <h3 class="card-title">Orders this week</h3>
+                    </div>
+                    <div class="chart-container" style="height: 220px;">
+                        <canvas id="weeklyChart"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SECTION 4: Data Table -->
+            <div class="table-card animate-in delay-5">
+                <div class="card-header">
+                    <div>
+                        <h3 class="card-title">Recent Transactions</h3>
+                        <p class="card-subtitle">Latest transaction records</p>
+                    </div>
+                </div>
+                <div class="table-toolbar">
+                    <div class="table-search">
+                        <span class="table-search-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                        </span>
+                        <input type="text" placeholder="Search transactions..." id="tableSearch" autocomplete="off">
+                    </div>
+                    <div class="card-actions">
+                        <button class="card-filter-btn active">All</button>
+                        <button class="card-filter-btn">Active</button>
+                        <button class="card-filter-btn">Pending</button>
+                    </div>
+                </div>
+                <div class="table-wrapper">
+                    <table class="data-table" id="dataTable">
+                        <thead>
+                            <tr>
+                                <th data-sort="name">Customer <span class="sort-icon">↕</span></th>
+                                <th data-sort="amount">Amount <span class="sort-icon">↕</span></th>
+                                <th data-sort="status">Status <span class="sort-icon">↕</span></th>
+                                <th data-sort="date">Date <span class="sort-icon">↕</span></th>
+                                <th data-sort="method">Payment <span class="sort-icon">↕</span></th>
+                            </tr>
+                        </thead>
+                        <tbody id="tableBody"></tbody>
+                    </table>
+                </div>
+                <div class="table-footer">
+                    <div class="table-info" id="tableInfo">Showing 1-8 of 16 results</div>
+                    <div class="pagination" id="pagination"></div>
+                </div>
+            </div>
+
+            <!-- SECTION 5: Bottom Grid (Activity + Calendar + Orders) -->
+            <div class="bottom-grid">
+                <div class="activity-card animate-in delay-5">
+                    <div class="card-header">
+                        <h3 class="card-title">Recent Activity</h3>
+                        <button class="card-filter-btn">View All</button>
+                    </div>
+                    <div class="activity-list" id="activityList"></div>
+                </div>
+
+                <div class="calendar-card animate-in delay-6">
+                    <div class="card-header" style="margin-bottom: 8px;">
+                        <h3 class="card-title">📅 Calendar</h3>
+                    </div>
+                    <div class="calendar-header-nav">
+                        <button class="calendar-nav-btn" id="calPrev">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>
+                        </button>
+                        <span class="calendar-month" id="calMonth"></span>
+                        <button class="calendar-nav-btn" id="calNext">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+                        </button>
+                    </div>
+                    <div class="calendar-grid" id="calendarGrid"></div>
+                </div>
+
+                <div class="orders-card animate-in delay-7">
+                    <div class="card-header">
+                        <h3 class="card-title">Recent Orders</h3>
+                        <button class="card-filter-btn">View All</button>
+                    </div>
+                    <div id="ordersList"></div>
+                </div>
+            </div>
+
+            <!-- SECTION 6: Performance Charts -->
+            <div class="metrics-grid">
+                <div class="metric-card animate-in delay-6">
+                    <div class="card-header">
+                        <div>
+                            <h3 class="card-title">Customer Growth</h3>
+                            <p class="card-subtitle">New vs returning customers</p>
+                        </div>
+                    </div>
+                    <div class="chart-container" style="height: 250px;">
+                        <canvas id="userGrowthChart"></canvas>
+                    </div>
+                </div>
+                <div class="metric-card animate-in delay-7">
+                    <div class="card-header">
+                        <div>
+                            <h3 class="card-title">Revenue by Category</h3>
+                            <p class="card-subtitle">Product categories breakdown</p>
+                        </div>
+                    </div>
+                    <div class="chart-container" style="height: 250px;">
+                        <canvas id="categoryChart"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SECTION 7: Team Members -->
+            <h2 class="section-title animate-in delay-6">👥 Team Members</h2>
+            <div class="team-grid" id="teamGrid"></div>
+
+            <!-- SECTION 8: Quick Actions -->
+            <h2 class="section-title animate-in delay-7">⚡ Quick Actions</h2>
+            <div class="quick-actions-grid">
+                <div class="quick-action-card animate-in delay-6">
+                    <div class="quick-action-icon">📊</div>
+                    <div class="quick-action-label">Generate Report</div>
+                </div>
+                <div class="quick-action-card animate-in delay-7">
+                    <div class="quick-action-icon">👤</div>
+                    <div class="quick-action-label">Add New User</div>
+                </div>
+                <div class="quick-action-card animate-in delay-7">
+                    <div class="quick-action-icon">📦</div>
+                    <div class="quick-action-label">New Product</div>
+                </div>
+                <div class="quick-action-card animate-in delay-8">
+                    <div class="quick-action-icon">📧</div>
+                    <div class="quick-action-label">Send Campaign</div>
+                </div>
+            </div>
+
+            <!-- SECTION 9: Footer -->
+            <footer class="dashboard-footer animate-in delay-8">
+                <div class="footer-left">
+                    © 2026 <strong>Omkar R. Ghare</strong>. All rights reserved. NexaShop dashboard demo.
+                </div>
+                <div class="footer-right">
+                    <a href="#" class="footer-link">Privacy Policy</a>
+                    <a href="#" class="footer-link">Terms of Service</a>
+                    <a href="#" class="footer-link">Support</a>
+                </div>
+            </footer>
+        </main>
+    </div>
+
+    <script src="js/script.js"></script>
+</body>
+</html>
